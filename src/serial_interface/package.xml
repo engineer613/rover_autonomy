@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package format="3">
+    <name>serial_interface</name>
+    <version>0.0.1</version>
+    <description>ROS 2 wrapper for a modular serial interface</description>
+    <maintainer email="you@example.com">Your Name</maintainer>
+    <license>MIT</license>
+
+    <buildtool_depend>ament_cmake</buildtool_depend>
+    <depend>utils</depend>
+
+    <export>
+        <build_type>ament_cmake</build_type>
+    </export>
+</package>
