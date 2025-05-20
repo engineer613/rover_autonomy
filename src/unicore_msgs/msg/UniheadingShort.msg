@@ -1,5 +1,5 @@
 std_msgs/Header header
-string pos_type
+uint32 pos_type
 float64 baseline
 float64 heading
 float64 heading_sigma

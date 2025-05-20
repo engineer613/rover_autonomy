@@ -3,14 +3,25 @@
 
 #include <array>
 
-namespace UnicoreMsgs {
+namespace UnicoreLogMsgs {
   #pragma pack(push, 1)  // Ensure no padding is added
 
   const std::array<uint8_t, 3> SYNC_BYTES = {0xAA, 0x44, 0xB5};
   constexpr size_t UNICORE_HEADER_LEN = 24;
+
+  constexpr uint16_t UNIHEADING_MSG_ID = 972;
   constexpr size_t UNIHEADING_LOG_LEN = UNICORE_HEADER_LEN + 48;
+
+  constexpr uint16_t AGRIC_MSG_ID = 11276;
   constexpr size_t AGRIC_LOG_LEN = UNICORE_HEADER_LEN + 232;
+
+  constexpr uint16_t PVTSLN_MSG_ID = 1021;
   constexpr size_t PVTSLN_LOG_LEN = UNICORE_HEADER_LEN + 228;
+
+  constexpr uint16_t RTKSTATUS_MSG_ID = 509;
+  constexpr size_t RTKSTATUS_LOG_LEN = UNICORE_HEADER_LEN + 60;
+
+  constexpr size_t MIN_LOG_LEN = UNIHEADING_LOG_LEN;
 
   enum class Model : uint32_t {
     UNKNOWN = 0,
@@ -20,6 +31,45 @@ namespace UnicoreMsgs {
     UM440   = 4,
     UM482   = 5,
     UM982   = 17
+  };
+
+  enum class PosVelType: uint32_t {
+    NO_SOL = 0,
+    FIXED_POS = 1,
+    FIXED_HEIGHT = 2,
+    DOPPLER_VEL = 8,
+    SINGLE = 16,
+    PSRDIFF = 17,
+    SBAS = 18,
+    L1_FLOAT = 32,
+    IONOFREE_FLOAT = 33,
+    NARROW_FLOAT = 34,
+    L1_INT = 48,
+    WIDE_INT = 49,
+    NARROW_INT = 50,
+    INS = 52,
+    INS_PSRSP = 53,
+    INS_PSRDIFF = 54,
+    INS_RTKFLOAT = 55,
+    INS_RTKFIXED = 56,
+    PPP_CONVERGING = 68,
+    PPP = 69
+  };
+
+  enum class SolutionStatus: uint32_t {
+    SOL_COMPUTED = 0,
+    INSUFF_OBS = 1,
+    NO_CONVERGENCE = 2,
+    COV_TRACE_HIGH = 3
+  };
+
+  enum class RTKStatus_CalcStatus : uint32_t {
+    NO_DATA = 0,
+    INSUFF_OBS_SRC = 1,
+    HIGH_LATENCY = 2,
+    ACTIVE_IONOSPH = 3,
+    INSUFF_OBS_ROV = 4,
+    RTK_GOOD = 5
   };
 
   // Binary Header: Usually 24 Bytes
@@ -302,8 +352,31 @@ namespace UnicoreMsgs {
     float pitch_sigma;
   };
 
+  struct RTKSTATUS {
+    UnicoreBinaryHeader header;
+    uint32_t gpsSource;        // H+0
+    uint32_t reserved1;        // H+4
+    uint32_t bdsSource1;       // H+8
+    uint32_t bdsSource2;       // H+12
+    uint32_t reserved2;        // H+16
+    uint32_t gloSource;        // H+20
+    uint32_t reserved3;        // H+24
+    uint32_t galSource1;       // H+28
+    uint32_t galSource2;       // H+32
+    uint32_t qzssSource;       // H+36
+    uint32_t reserved4;        // H+40
+    uint32_t positionType;     // H+44
+    uint32_t calcStatus;       // H+48
+    uint8_t  ionDetected;      // H+52
+    uint8_t  dualRtkFlag;      // H+53
+    uint8_t  adrNumber;        // H+54
+    uint8_t  reserved5;        // H+55
+    uint32_t crc;              // H+56
+    char     terminator[2];    // H+60
+  };
+
   #pragma pack(pop)
-} // namespace UnicoreMsgs
+} // namespace UnicoreLogMsgs
 
 
 
@@ -351,9 +424,9 @@ namespace RoverMsgs {
   };
 
   struct Velocity {
-    double vel_north;      // m/s (e.g., forward)
-    double vel_east;      // m/s (e.g., lateral)
-    double vel_up;      // m/s (e.g., vertical)
+    double vel_north;    // m/s (e.g., forward)
+    double vel_east;     // m/s (e.g., lateral)
+    double vel_up;       // m/s (e.g., vertical)
 
     double yaw_rate_dps;   // deg/s
 

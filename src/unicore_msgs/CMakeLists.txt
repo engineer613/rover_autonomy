@@ -15,9 +15,10 @@ find_package(std_msgs REQUIRED)
 
 
 rosidl_generate_interfaces(${PROJECT_NAME}
-        "msg/UNIHEADINGShort.msg"
-        "msg/AGRICShort.msg"
-        "msg/PVTSLNShort.msg"
+        "msg/UniheadingShort.msg"
+        "msg/AgricShort.msg"
+        "msg/PvtslnShort.msg"
+        "msg/RTKStatusShort.msg"
         DEPENDENCIES std_msgs
 )
 

@@ -6,12 +6,7 @@
 #include <cstddef>
 #include <chrono>
 
-#include "utils/PooledQueue.hpp"
-
-constexpr int QUEUE_SIZE = 50;
-constexpr int BUFFER_SIZE = 256;
-using SerialBuffer = std::array<uint8_t, BUFFER_SIZE>;
-using SerialQueue = PooledQueue<SerialBuffer, QUEUE_SIZE>;
+constexpr size_t BUFFER_SIZE = 1024;
 
 enum class Parity {
   NONE = 0,

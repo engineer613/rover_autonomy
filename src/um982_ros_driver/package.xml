@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="3">
-    <name>um982_driver</name>
+    <name>um982_ros_driver</name>
     <version>0.0.1</version>
     <description>GNSS driver for the Unicore UM982 receiver</description>
     <maintainer email="you@example.com">Your Name</maintainer>
@@ -9,9 +9,11 @@
     <buildtool_depend>ament_cmake</buildtool_depend>
 
     <depend>rclcpp</depend>
+    <depend>rclcpp_lifecycle</depend>
+    <depend>rclcpp_components</depend>
     <depend>serial_interface</depend>
-    <depend>utils</depend>
     <depend>unicore_msgs</depend>
+
 
     <export>
         <build_type>ament_cmake</build_type>
