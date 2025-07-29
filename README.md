@@ -1,6 +1,6 @@
 # rover_autonomy
-This is a repository for a (work-in-progress) ROS2 based software stack for an Ackermann Steered, RC car based, land vehicle capable of autonomously traversing GPS Waypoints. The repo root is the root of a ROS2 colcon workspace.
 
+_**This is a repository for a (work-in-progress) ROS2 based software stack for an Ackermann Steered, RC car based, land vehicle capable of autonomously traversing GPS Waypoints. The repo root is the root of a ROS2 colcon workspace.**_
 
 <img width="782" height="590" alt="unnamed" src="https://github.com/user-attachments/assets/aa8b367b-96e4-4678-a06f-bb4f6d114cab" />
 
